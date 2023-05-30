@@ -1,9 +1,9 @@
-export function Drag(args = { itens, zones, itemClassInDragging, itemClassInOverZone, zoneClassOver }) {
+function Drag(args = { itens, zones, itemClassInDragging, itemClassInOverZone, zonesClassItemDragging }) {
   const itens = document.querySelectorAll(args.itens)
   const zones = document.querySelectorAll(args.zones)
 
   const itemClassInDragging = args.itemClassInDragging || "item-dragging"
-  const zoneClassOver = args.zoneClassOver || "item-over-zone"
+  const zonesClassItemDragging = args.zonesClassItemDragging || "item-over-zone"
   const itemClassInOverZone = args.itemClassInOverZone || "zone-over"
 
   let itemDragging
@@ -27,7 +27,7 @@ export function Drag(args = { itens, zones, itemClassInDragging, itemClassInOver
 
   // Item
   function dragstart() {
-    zones.forEach(zone => zone.classList.add(zoneClassOver.split(" ")))
+    zones.forEach(zone => zone.classList.add(zonesClassItemDragging.split(" ")))
 
     this.classList.add(itemClassInDragging.split(" "))
 
@@ -37,7 +37,7 @@ export function Drag(args = { itens, zones, itemClassInDragging, itemClassInOver
   function drag() { }
 
   function dragend() {
-    zoneClassOver.split(" ").forEach(className => zones.forEach(zone => zone.classList.remove(className)))
+    zonesClassItemDragging.split(" ").forEach(className => zones.forEach(zone => zone.classList.remove(className)))
     itemClassInDragging.split(" ").forEach(className => this.classList.remove(className))
 
     itemDragging = null
